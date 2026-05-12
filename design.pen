@@ -1,0 +1,204 @@
+{
+  "version": "0.4.0",
+  "name": "book-video-studio",
+  "description": "视觉风格参数配置文件 — 定义生图风格、BGM 偏好、字幕样式、字体、色彩方案",
+
+  "image_generation": {
+    "default_model": "midjourney-v6",
+    "fallback_models": ["flux.1-pro", "dall-e-3", "stable-diffusion-xl"],
+    "default_params": {
+      "--v": "6.1",
+      "--q": "1",
+      "--seed": null,
+      "--style": "raw"
+    },
+    "style_presets": {
+      "cinematic": {
+        "description": "电影级质感，适合商业管理类",
+        "suffix": "cinematic lighting, shallow depth of field, 35mm lens, color graded, film grain, anamorphic bokeh --ar 16:9 --v 6.1 --style raw",
+        "color_palette": ["#1A1A2E", "#16213E", "#0F3460", "#E94560"],
+        "mood": "serious, authoritative, thought-provoking"
+      },
+      "watercolor": {
+        "description": "水彩手绘风，适合治愈/情感类",
+        "suffix": "watercolor painting style, soft edges, pastel tones, gentle wash, hand-drawn texture, white paper background --ar 16:9 --v 6.1",
+        "color_palette": ["#F5E6D3", "#D4A574", "#8B7355", "#4A6741"],
+        "mood": "warm, gentle, healing, nostalgic"
+      },
+      "minimalist": {
+        "description": "极简扁平风，适合工具/方法论类",
+        "suffix": "minimalist flat design, clean vector art, geometric shapes, solid color blocks, plenty of white space, modern UI aesthetic --ar 16:9 --v 6.1 --style raw",
+        "color_palette": ["#FFFFFF", "#F8F9FA", "#6C757D", "#212529"],
+        "mood": "clear, efficient, professional, modern"
+      },
+      "3d_render": {
+        "description": "3D 渲染风，适合科技/未来感",
+        "suffix": "3D render, octane render, isometric view, soft studio lighting, clay material, pastel gradient background, clean composition --ar 16:9 --v 6.1 --style raw",
+        "color_palette": ["#667EEA", "#764BA2", "#F093FB", "#F5576C"],
+        "mood": "innovative, futuristic, tech-forward, premium"
+      },
+      "editorial": {
+        "description": "杂志封面风，适合爆款/话题类",
+        "suffix": "magazine editorial photography, dramatic portrait, bold typography space, high contrast, studio lighting, vogue style --ar 16:9 --v 6.1 --style raw",
+        "color_palette": ["#000000", "#FFFFFF", "#FF3366", "#333333"],
+        "mood": "bold, attention-grabbing, premium, editorial"
+      },
+      "anime": {
+        "description": "日系动漫风，适合年轻受众/轻小说",
+        "suffix": "anime style, cel shading, vibrant colors, detailed background, makoto shinkai inspired, lens flare, emotional atmosphere --ar 16:9 --v 6.1",
+        "color_palette": ["#FF9A9E", "#FECFEF", "#A18CD1", "#FBC2EB"],
+        "mood": "emotional, youthful, dreamy, energetic"
+      }
+    }
+  },
+
+  "video_generation": {
+    "default_model": "kling-ai",
+    "fallback_models": ["runway-gen3", "luma-dream-machine", "pika-1.0", "stable-video-diffusion"],
+    "default_params": {
+      "duration_seconds": 5,
+      "fps": 24,
+      "motion_scale": 5,
+      "camera_movement": "subtle"
+    },
+    "camera_movements": {
+      "ken_burns": "slow zoom in, cinematic pan right",
+      "orbit": "slow 360 orbit around subject",
+      "dolly": "dolly in slowly, reveal scene",
+      "static": "locked-off tripod shot, subtle atmospheric movement",
+      "push_in": "gradual push in to subject's face"
+    }
+  },
+
+  "tts": {
+    "default_engine": "edge-tts",
+    "fallback_engines": ["azure-tts", "elevenlabs", "openai-tts"],
+    "voice_presets": {
+      "male_deep": {
+        "description": "深沉男声，适合商业/认知类",
+        "edge_voice": "zh-CN-YunxiNeural",
+        "rate": "+0%",
+        "pitch": "-10Hz",
+        "style": "narration-professional"
+      },
+      "male_warm": {
+        "description": "温暖男声，适合治愈/情感类",
+        "edge_voice": "zh-CN-YunyangNeural",
+        "rate": "-5%",
+        "pitch": "+0Hz",
+        "style": "empathetic"
+      },
+      "female_clear": {
+        "description": "清晰女声，适合干货/方法论",
+        "edge_voice": "zh-CN-XiaoxiaoNeural",
+        "rate": "+5%",
+        "pitch": "+0Hz",
+        "style": "assistant"
+      },
+      "female_gentle": {
+        "description": "温柔女声，适合睡前/助眠类",
+        "edge_voice": "zh-CN-XiaoyiNeural",
+        "rate": "-10%",
+        "pitch": "-5Hz",
+        "style": "calm"
+      }
+    },
+    "speech_rate_chinese_chars_per_sec": 4.5
+  },
+
+  "subtitle": {
+    "font_family": "Noto Sans SC",
+    "fallback_fonts": ["Source Han Sans SC", "Microsoft YaHei", "PingFang SC"],
+    "font_size_16_9": 36,
+    "font_size_9_16": 42,
+    "font_color": "#FFFFFF",
+    "stroke_color": "#000000",
+    "stroke_width": 2,
+    "shadow_color": "rgba(0,0,0,0.5)",
+    "shadow_offset": "2:2",
+    "position_16_9": "aligned at bottom, 10% from bottom edge",
+    "position_9_16": "aligned at bottom, 18% from bottom edge (above TikTok UI safe zone)",
+    "max_chars_per_line": 20,
+    "max_lines": 2,
+    "line_spacing": 1.2
+  },
+
+  "bgm": {
+    "sources": ["youtube-audio-library", "epidemic-sound", "artlist", "local-library"],
+    "genre_mood_mapping": {
+      "商业/搞钱": "upbeat corporate, driving rhythm, motivational build",
+      "心理学/情感": "ambient piano, soft strings, warm pad, slow tempo",
+      "工具/方法论": "lo-fi hip hop, clean beat, focus-enhancing",
+      "悬疑/认知颠覆": "minimal tension, bass drone, ticking clock, subtle strings",
+      "治愈/睡前": "nature sounds, gentle acoustic guitar, rain ambience, 60-70 BPM"
+    },
+    "volume_rules": {
+      "bgm_volume": "-18dB",
+      "tts_volume": "+3dB",
+      "bgm_duck_on_speech": true,
+      "duck_threshold": "-20dB",
+      "duck_release": "200ms"
+    }
+  },
+
+  "thumbnail": {
+    "rule_of_3": "max 3 visual elements: background + subject + text overlay",
+    "max_text_chars": 5,
+    "font_weight": "extra-bold",
+    "text_color": "#FFFFFF",
+    "text_stroke": "#000000 3px",
+    "text_shadow": "strong drop shadow",
+    "contrast_boost": "+30%",
+    "saturation_boost": "+15%",
+    "cta_colors": ["#FF3366", "#FFD700", "#00FF88"],
+    "composition_rules": {
+      "face_emotion": "extreme emotion (surprise, excitement, concern) increases CTR by 30%",
+      "eye_contact": "subject looking at camera increases CTR by 20%",
+      "negative_space": "leave 40% of frame free for text overlay",
+      "color_pop": "one dominant saturated color against neutral background"
+    }
+  },
+
+  "platform_defaults": {
+    "youtube": {
+      "aspect_ratio": "16:9",
+      "resolution": "1920x1080",
+      "target_duration": "10-15min",
+      "fps": 30,
+      "safe_zone_top_pct": 5,
+      "safe_zone_bottom_pct": 5,
+      "safe_zone_left_pct": 3,
+      "safe_zone_right_pct": 3
+    },
+    "shorts": {
+      "aspect_ratio": "9:16",
+      "resolution": "1080x1920",
+      "target_duration": "30-60s",
+      "fps": 30,
+      "safe_zone_top_pct": 20,
+      "safe_zone_bottom_pct": 30,
+      "safe_zone_left_pct": 5,
+      "safe_zone_right_pct": 5
+    },
+    "tiktok": {
+      "aspect_ratio": "9:16",
+      "resolution": "1080x1920",
+      "target_duration": "15-60s",
+      "fps": 30,
+      "safe_zone_top_pct": 20,
+      "safe_zone_bottom_pct": 30,
+      "safe_zone_left_pct": 10,
+      "safe_zone_right_pct": 15
+    },
+    "bilibili": {
+      "aspect_ratio": "16:9",
+      "resolution": "1920x1080",
+      "target_duration": "5-10min",
+      "fps": 30,
+      "safe_zone_top_pct": 10,
+      "safe_zone_bottom_pct": 15,
+      "safe_zone_left_pct": 5,
+      "safe_zone_right_pct": 5
+    }
+  }
+}
