@@ -1,26 +1,26 @@
 <div align="center">
    
-# 📚 Book Video Studio (书单视频工坊)
+# 📚 Book Video Studio (书单视频工坊) v3 YouTube Pro
    
-**把一本书变成一套多平台视频矩阵 (YouTube / Shorts / TikTok)**
+**把一本书变成一套高权重、SEO 友好的多平台视频矩阵 (YouTube / Shorts / TikTok)**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Platform: Hermes](https://img.shields.io/badge/Platform-Hermes-blue)](https://github.com/hermes-agent)
+[![Version: 0.3.0](https://img.shields.io/badge/Version-0.3.0-blue)](https://github.com/5474312/book-video-studio)
 [![Category: Content Generation](https://img.shields.io/badge/Category-Content-orange)](https://github.com/5474312/book-video-studio)
 
 </div>
 
-**不是读书笔记，是流量武器。**
+**不是读书笔记，是 YouTube 流量武器。**
 
 ---
 
-## ✨ 核心亮点
+## ✨ 核心亮点 (v3 YouTube Pro)
 
-- **🎬 全时长覆盖**：60s (Shorts) / 5min / 15min / 30min 一键生成不同策略脚本。
-- **🔥 爆款引擎**：基于情绪/痛点/反直觉提取，不做平庸摘要。
-- **📝 分镜自动化**：输出标准 JSON 分镜表 -> 自动生图 Prompt -> 自动 TTS 分段。
-- **🎨 一键合成**：内置 FFmpeg 自动化脚本，快速组装成片。
-- **📖 多平台适配**：YouTube, Bilibili, TikTok, 小红书，一套内容全分发。
+- **🎬 YouTube 算法适配**：自动生成 SEO 标题、标签、简介（含时间戳章节）。
+- **🖼️ 高点击率封面策略**：专为 YouTube 生成高 CTR 封面 Prompt，拒绝平庸截图。
+- **📱 多平台自适应**：16:9 (YouTube 长视频) vs 9:16 (Shorts/TikTok) 自动切换构图。
+- **🎣 交互式钩子筛选**：先审 3 秒开头，再做全片，确保完播率。
+- **⚡ 全自动化组装**：SRT 字幕自动生成 + FFmpeg 脚本一键合成。
 
 ## 🚀 快速使用
 
@@ -32,14 +32,17 @@ git clone https://github.com/5474312/book-video-studio.git
 cp -r book-video-studio ~/.hermes/skills/
 ```
 
-然后输入指令：
-> "用 book-video-studio 帮我拆解《被讨厌的勇气》，出一个 60s 短视频脚本"
+**YouTube 长视频指令示例：**
+> "用 book-video-studio 拆解《纳瓦尔宝典》，我要做 YouTube 长视频 (15min)，帮我选个高点击率封面风格。"
+
+**TikTok/Shorts 指令示例：**
+> "用 book-video-studio 拆解《被讨厌的勇气》，做一个 TikTok (9:16) 短视频。"
 
 ## 📦 目录结构
 
 ```
 book-video-studio/
-├── SKILL.md                  # 核心工作流与规则定义
+├── SKILL.md                  # 核心工作流与规则定义 (v3 YouTube Pro)
 ├── references/
 │   ├── prompt-styles.md      # 5 种生图风格模板 (电影级/3D/手绘等)
 │   └── script-templates/     # 4 种时长脚本模板
