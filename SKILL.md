@@ -82,14 +82,24 @@
     82|- `draftStatus`
     83|- `assetsGenerated` (list of completed asset files)
     84|
-    85|## Script Directory
-    86|
-    87|Determine this SKILL.md directory as `SKILL_DIR`, then use `${SKILL_DIR}/scripts/<name>`.
-    88|
-    89|| Script | Purpose |
-    90||--------|---------|
-    91|| `scripts/auto_compose.py` | FFmpeg assembly entrypoint (`render`, `compose`, `info`, `srt`) |
-    92|| `scripts/timing_calculator.py` | Duration estimation and SRT generation engine |
+## Script Directory
+
+Determine this SKILL.md directory as `SKILL_DIR`, then use `${SKILL_DIR}/scripts/<name>`.
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/auto_compose.py` | FFmpeg assembly entrypoint (`render`, `compose`, `info`, `srt`) |
+| `scripts/timing_calculator.py` | Duration estimation and SRT generation engine |
+| `scripts/tts_long_text.py` | **长文案一次性转语音** — 自动分段 + edge-tts 生成 + ffmpeg 拼接，无长度限制 |
+| `scripts/adaptive_storyboard.py` | **自适应分镜生成器** — 读取音频时长 + 按目标节奏（默认 18s/段）拆分文案 + 关键词匹配画面 Prompt |
+
+## Operating Paths (updated)
+
+- `Path A: viral-book-video` — full pipeline from book title/author to multi-platform video matrix.
+- `Path B: hook-only` — generate only the 5 hook variants for user to preview.
+- `Path C: storyboard-only` — generate storyboard JSON from an approved script.
+- `Path D: asset-only` — generate image/video prompts from an existing storyboard.
+- **`Path E: script-to-video` — 已有文案 + 音频 → 自适应分镜 → 批量生图 → FFmpeg 合成视频（本次优化新增）**
     93|
     94|## Native Capability Contract
     95|
@@ -149,7 +159,57 @@
    149|- If TTS emotional range is insufficient, split the script into shorter emotional segments and batch-generate.
    150|- For cost-sensitive runs: use open-weight models (Flux.1-dev, Stable Video Diffusion) on local GPU.
    151|
-   152|## Execution
+   152|## Path E: script-to-video (已有文案 + 音频 → 视频)
+
+**适用场景**：已有现成文案（如公众号文章、口播稿）+ TTS 音频，需要快速生成视频。
+
+### 流程
+
+1. **音频时长获取** — `ffprobe` 读取精确时长
+2. **自适应文案拆分** — `scripts/adaptive_storyboard.py` 按目标节奏（默认 18s/段）自动拆分，优先在句号/感叹号/问号处断句
+3. **分镜 JSON 生成** — 输出 `storyboard.json` + `image_prompts.json`
+   - 每段自动匹配关键词 → 画面 Prompt（KEYWORD_MAP）
+   - 统一风格锁（cinematic, dark moody, 16:9）
+4. **批量生图** — 按 `image_prompts.json` 批量生成画面
+5. **TTS 配音** — `scripts/tts_long_text.py` 长文案自动分段生成（无长度限制）
+6. **FFmpeg 合成** — 图片 Ken Burns 运镜 + SRT 字幕 + 音频 + BGM
+
+### 命令示例
+
+```bash
+# Step 1: 生成分镜（自动读取音频时长）
+python3 scripts/adaptive_storyboard.py \
+    --input script.txt --audio audio.mp3 \
+    --segment-duration 18 --output-dir ./output
+
+# Step 2: 长文案转语音（如音频未准备好）
+python3 scripts/tts_long_text.py \
+    --input script.txt --output audio.mp3 --voice xiaoxiao
+
+# Step 3: 批量生图后，FFmpeg 合成
+python3 scripts/auto_compose.py compose \
+    --storyboard output/storyboard.json \
+    --output final.mp4
+```
+
+### 参数建议
+
+| 参数 | 推荐值 | 说明 |
+|------|--------|------|
+| `segment-duration` | 15-20s | 每图时长，15-20 秒最佳（同类型账号标准） |
+| `voice` | xiaoxiao | 女声口播最推荐，yunxi 男声活力 |
+| `rate` | +0% ~ +10% | 语速微调，商业认知类推荐 +5% |
+
+### 画面数量计算
+
+```
+画面数 = 音频时长(秒) / segment-duration
+例: 1054s / 18s ≈ 58 张图
+```
+
+---
+
+## Execution
    153|
    154|Run the video through these phases:
    155|

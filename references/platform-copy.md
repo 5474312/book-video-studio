@@ -13,7 +13,7 @@ This document defines platform-specific rules for script pacing, visual composit
 | Target Duration | 10-15 min | 30-60s | 15-60s | 5-10 min |
 | Script Pacing | 深度展开，4-5 观点 | 极速，1 核心点 | 极速，1 核心点 | 干货密集，3-4 观点 |
 | Word Count | ≤ 3500 chars | ≤ 260 chars | ≤ 260 chars | ≤ 2000 chars |
-| Cut Frequency | Every 8-12s | Every 2-3s | Every 2-3s | Every 5-8s |
+| 换图频率 | 15-20s/张 (Ken Burns运镜，每段文案对应4-5张图切换) | Every 2-3s | Every 2-3s | Every 5-8s |
 | Safe Zone | Standard 3% border | Top 20% + Bottom 30% | Top 20% + Bottom 30% + Right 15% | Standard 5% border |
 | Font Size | 36px | 42px | 44px | 36px |
 | BGM Style | Ambient / Lo-fi | Trending / Upbeat | Trending / Viral | Anime / Lo-fi / 电子 |
